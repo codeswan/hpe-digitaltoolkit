@@ -6,6 +6,12 @@ var Route = Router.Route;
 var Box = require('grommet/components/Box');
 var Marquee = require('../modules/Marquee');
 
+const canUseDOM = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+
 var Examples = React.createClass({
   contextTypes: {
     routePrefix: React.PropTypes.string.isRequired
@@ -19,6 +25,43 @@ var Examples = React.createClass({
     return {
       routePrefix: this.context.routePrefix + 'examples/'
     };
+  },
+
+  componentWillMount() {
+    if (canUseDOM) {
+      const script = document.createElement('script');
+      script.src = 'http://grommet.us.rdlabs.hpecorp.net/hpe/hpe-internal/hpe.js';
+      document.body.appendChild(script);
+
+      setTimeout(function() {
+        window._HPE.initialize({
+          styleWholePage: false,
+          header: {
+            load: true,
+            isExternal: true,
+            links: [{
+              label: 'Home',
+              href: '/home'
+            }, {
+              label: 'Navigation',
+              links: [{
+                label: 'Contact',
+                href: '/contact'
+              }, {
+                label: 'Help',
+                href: '/help'
+              }]
+            }, {
+              label: 'About Us',
+              href: '/about'
+            }]
+          },
+          footer: {
+            load: true
+          }
+        });
+      }, 1000);
+    }
   },
 
   render: function () {
