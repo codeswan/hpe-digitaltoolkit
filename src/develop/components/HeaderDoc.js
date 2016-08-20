@@ -1,9 +1,7 @@
 // (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
 import React, { Component } from 'react';
-import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
-import Box from 'grommet/components/Box';
 import DocsArticle from '../../DocsArticle';
 import Example from '../Example';
 import Header from '../../modules/Header';
@@ -51,23 +49,15 @@ export default class HeaderDoc extends Component {
 
           <Example name="XLarge" code={
             <Header>
-              <Menu direction="row" responsive={false}>
-                <Box pad={{ horizontal: "medium" }}>
-                  <Anchor href="#" className="active">
-                    First
-                  </Anchor>
-                </Box>
-                <Box pad={{ horizontal: "medium" }}>
-                  <Anchor href="#">
-                    Second
-                  </Anchor>
-                </Box>
-                <Box pad={{ horizontal: "medium" }}>
-                  <Anchor href="#">
-                    Third
-                  </Anchor>
-                </Box>
-              </Menu>
+              <Anchor href="#" className="active">
+                First
+              </Anchor>
+              <Anchor href="#">
+                Second
+              </Anchor>
+              <Anchor href="#">
+                Third
+              </Anchor>
             </Header>
           } />
 

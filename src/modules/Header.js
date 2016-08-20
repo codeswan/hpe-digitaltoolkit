@@ -5,11 +5,12 @@ import Responsive from 'grommet/utils/Responsive';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 import Title from 'grommet/components/Title';
-import Search from 'grommet/components/Search';
-import HeaderMenu from './Header/HeaderMenu';
+import Button from 'grommet/components/Button';
+import SearchIcon from 'grommet/components/icons/base/Search';
+import Menu from 'grommet/components/Menu';
 import Logo from './Header/Logo';
 
-const CLASS_ROOT = 'hpe-header';
+const CLASS_ROOT = 'header';
 
 export default class HPEHeader extends Component {
 
@@ -46,11 +47,19 @@ export default class HPEHeader extends Component {
     let reverseLogo = false;
     let classes = [CLASS_ROOT];
     let colorIndex = null;
-    let titleBoxClass;
     let headerAlign = 'center';
 
     if (this.props.className) {
       classes.push(this.props.className);
+    }
+
+    let menuItems;
+    if (this.props.children) {
+      menuItems = (
+        <Menu direction="row">
+          {this.props.children}
+        </Menu>
+      );
     }
 
     return (
@@ -65,13 +74,13 @@ export default class HPEHeader extends Component {
               between: 'small'
             }} wrap={true}
             external={this.props.external}>
-            <Box className={titleBoxClass}>
+            <Box>
               <Title onClick={this._onClickTitle}>
                 <Logo reverse={reverseLogo} />
               </Title>
             </Box>
-            {this.props.children}
-            <Search dropAlign={{"right": "right"}} />
+            {menuItems}
+            <Button icon={<SearchIcon />} onClick={() => console.log('hi')} />
           </Header>
         </Box>
       </div>
@@ -82,8 +91,6 @@ export default class HPEHeader extends Component {
 HPEHeader.propTypes = {
   centered: PropTypes.bool,
   colorIndex: PropTypes.string,
-  external: PropTypes.bool,
-  links: HeaderMenu.propTypes.links,
   logoLink: PropTypes.string,
   onClickLogo: PropTypes.func
 };
